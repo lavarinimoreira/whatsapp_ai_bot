@@ -47,6 +47,22 @@ services:
     ports:
       - 6379:6379
 
+  # ------------------
+  # bot
+  # ------------------
+  bot:
+    build: . # procura pelo Dockerfile na raiz
+    container_name: bot
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - evolution-api
+      - redis
+    restart: always
+    #  <--A FAZER-->: adicionar volume
+
 volumes:
   evolution_instances: # armazena os números que forem conectados
   postgres_data:
